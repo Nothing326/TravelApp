@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Travel App</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_lbl_find_the_best_tour">Find the Best Tour</string>
+    <string name="tv_lbl_country">Country</string>
+    <string name="tv_lbl_discount_tour">Discount Tour</string>
+    <string name="tv_lbl_popular_tour">Popular Tour</string>
+    <string name="tv_lbl_american">American</string>
+    <string name="tv_lbl_10_nights_for_two_all_inclusive">10 nights for two/all inclusive</string>
+    <string name="tv_lbl_245">$245</string>
+    <string name="tv_lbl_sand_beach">Sand\nBeach</string>
+    <string name="tv_lbl_free_wifi">Free\nWifi</string>
+    <string name="tv_lbl_bar_and_restaurant">Bar And\nRestaurant</string>
+    <string name="tv_lbl_first_ncoastline">First\nCoastline</string>
+    <string name="title_activity_detail">DetailActivity</string>
+</resources>
