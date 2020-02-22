@@ -18,14 +18,12 @@ object CountryModelImpl : CountryModel, BaseModel() {
 
 
         getCountryListObservable()
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 mTheDB.CountryDao().insertAllCountries(it)
             }, {
                 //                onError(it.localizedMessage ?: EM_NO_INTERNET_CONNECTION)
             })
         getTourListObservable()
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 mTheDB.CountryDao().insertAllCountries(it)
             }, {
@@ -70,6 +68,7 @@ object CountryModelImpl : CountryModel, BaseModel() {
             val countryList = ArrayList<CountryVO>()
             val popularTourList = ArrayList<CountryVO>()
 
+            countryList.addAll(t1)
             t1.forEach {
                 countryList.add(it)
             }
