@@ -60,7 +60,8 @@ object CountryModelImpl : CountryModel, BaseModel() {
             val countryList = ArrayList<CountryVO>()
             val popularTourList = ArrayList<CountryVO>()
 
-
+            countryList.addAll(t1)
+            popularTourList.addAll(t2)
 
 
             MainVO(countryList, popularTourList)
