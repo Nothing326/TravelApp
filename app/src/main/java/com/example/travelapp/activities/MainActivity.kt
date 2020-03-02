@@ -1,14 +1,10 @@
-package com.example.travelapp.activities
+package com.example.travelapp.activities.com.example.travelapp.activities
 
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerViewAccessibilityDelegate
 import com.example.travelapp.R
-import com.example.travelapp.data.models.CountryModel
-import com.example.travelapp.data.models.CountryModelImpl
-import com.example.travelapp.delegates.TourItemDelegate
-import com.example.travelapp.fragments.DetailFragment
+import com.example.travelapp.activities.BaseActivity
 import com.example.travelapp.fragments.HomeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*

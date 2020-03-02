@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 
 import com.example.travelapp.R
 import com.example.travelapp.adapters.PhotoListAdpater
@@ -66,6 +67,10 @@ private lateinit var photoAdapter:PhotoListAdpater
                 view.tvTitle.text = countryVO.name
                 view.tvPlace.text = countryVO.location
                 view.rb.rating = countryVO.averageRating.toFloat()
+                Glide.with(this)
+                    .load(countryVO.photos[0])
+                    .centerCrop()
+                    .into(view.expandedImage)
 
                 view.tvDescription.text = countryVO.description
                 scoreAndReviewAdapter.setNewData(countryVO.scoresAndReviews)

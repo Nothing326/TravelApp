@@ -18,17 +18,13 @@ object CountryModelImpl : CountryModel, BaseModel() {
 
 
         getCountryListObservable()
-            .subscribe({
+            .subscribe{
                 mTheDB.CountryDao().insertAllCountries(it)
-            }, {
-                //                onError(it.localizedMessage ?: EM_NO_INTERNET_CONNECTION)
-            })
+            }
         getTourListObservable()
-            .subscribe({
+            .subscribe{
                 mTheDB.CountryDao().insertAllCountries(it)
-            }, {
-                //                onError(it.localizedMessage ?: EM_NO_INTERNET_CONNECTION)
-            })
+            }
 
 
         return Observable.zip(
@@ -52,14 +48,10 @@ object CountryModelImpl : CountryModel, BaseModel() {
     }
 
 
-
-
     override fun getDataByName(name: String): LiveData<CountryVO> {
 
         return mTheDB.CountryDao().getCountryByName(name)
     }
-
-
 
 
     private fun mergerListForMainVO(): BiFunction<List<CountryVO>, List<CountryVO>, MainVO> {
@@ -69,12 +61,8 @@ object CountryModelImpl : CountryModel, BaseModel() {
             val popularTourList = ArrayList<CountryVO>()
 
             countryList.addAll(t1)
-            t1.forEach {
-                countryList.add(it)
-            }
-           t2.forEach {
-               popularTourList.add(it)
-           }
+            popularTourList.addAll(t2)
+
 
             MainVO(countryList, popularTourList)
         }

@@ -1,7 +1,7 @@
 package com.example.travelapp.util
 
 const val PARAM_ACCESS_TOKEN = "access_token"
-const val BASE_URL = "http://e1314c36-5305-4773-90b6-d3032291d1bf.mock.pstmn.io"
+const val BASE_URL = "http://3a7720f5-1a8f-49b0-844f-55a75d104e25.mock.pstmn.io"
 const val GET_COUNTRIES = "/getAllCountries"
 const val GET_TOURS = "/getAllTours"
 

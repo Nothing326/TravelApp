@@ -13,7 +13,6 @@ import com.google.gson.annotations.SerializedName
 
 data class CountryVO(
 
-    @PrimaryKey
     @SerializedName("name")
     val name : String = "",
 
@@ -31,4 +30,9 @@ data class CountryVO(
 
     @SerializedName("photos")
     val photos: ArrayList<String> = arrayListOf()
-)
+){
+
+        @PrimaryKey(autoGenerate = true)
+        var id: Int = 0
+
+}
