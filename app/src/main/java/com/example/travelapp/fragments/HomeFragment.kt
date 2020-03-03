@@ -14,9 +14,11 @@ import com.example.travelapp.adapters.PopularTourListAdapter
 import com.example.travelapp.data.models.CountryModel
 import com.example.travelapp.data.models.CountryModelImpl
 import com.example.travelapp.delegates.TourItemDelegate
+import com.example.travelapp.views.viewpods.EmptyViewPod
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -29,6 +31,8 @@ class HomeFragment : Fragment(),TourItemDelegate {
     private  lateinit var  mCountryListAdapter : CountryListAdapter
     private  lateinit var  mPopularTourListAdapter : PopularTourListAdapter
     private  val mCountryModel : CountryModel = CountryModelImpl
+
+    private lateinit var viewPodEmpty : EmptyViewPod
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -44,6 +48,10 @@ class HomeFragment : Fragment(),TourItemDelegate {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        setUpEmptyViewPod()
+        hideEmptyView()
 
         setUpRecyclerViewForCountry()
 
@@ -68,48 +76,31 @@ class HomeFragment : Fragment(),TourItemDelegate {
         rvPopularTour.adapter = mPopularTourListAdapter
     }
 
+
+
     private fun requestData(){
         swipeRefreshLayout.isRefreshing = true
-        requestDataForPopularList()
-        requestDataForCountryList()
-    }
-
-    private fun requestDataForPopularList(){
-          mCountryModel.getAllPopularTourAndCountry()
-              .observeOn(AndroidSchedulers.mainThread())
-              .subscribe({
-                  if(it.country.isNotEmpty()){
-                      swipeRefreshLayout.isRefreshing = false
-                      mCountryListAdapter.setNewData(it.country)
-                  }else{
-                      Log.e("Error","EmptyError")
-
-                  }
-
-              },{
-                  //                onError(it.localizedMessage ?: EM_NO_INTERNET_CONNECTION)
-              }).addTo(compositeDisposable)
-
-
-    }
-
-    private fun requestDataForCountryList(){
 
         mCountryModel.getAllPopularTourAndCountry()
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                if(it.popularTour.isNotEmpty()){
-                    swipeRefreshLayout.isRefreshing = false
-                    mPopularTourListAdapter.setNewData(it.popularTour)
-                }else{
-                    Log.e("Error","EmptyError")
+              .subscribeOn(Schedulers.io())
+              .observeOn(AndroidSchedulers.mainThread())
+              .subscribe {
+                  if (it.country.isNotEmpty()|| it.popularTour.isNotEmpty()) {
+                      hideEmptyView()
 
-                }
-            },{
-                //                onError(it.localizedMessage ?: EM_NO_INTERNET_CONNECTION)
-            }).addTo(compositeDisposable)
+                      swipeRefreshLayout.isRefreshing = false
+                      mCountryListAdapter.setNewData(it.country)
+                      mPopularTourListAdapter.setNewData(it.popularTour)
+                  } else {
+                      showEmptyView()
+                  }
+
+              }.addTo(compositeDisposable)
+
 
     }
+
+
     companion object {
         @JvmStatic
         fun newInstance(name: String) =
@@ -126,5 +117,18 @@ class HomeFragment : Fragment(),TourItemDelegate {
             ?.commit()
     }
 
+    private fun hideEmptyView(){
+        viewPodEmpty.visibility = View.GONE
+    }
+    private fun showEmptyView(){
+        viewPodEmpty.visibility = View.VISIBLE
+    }
+    private fun setUpEmptyViewPod(){
+        viewPodEmpty = vpEmpty as EmptyViewPod
+    }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.dispose()
+    }
 }

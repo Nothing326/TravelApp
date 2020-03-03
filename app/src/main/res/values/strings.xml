@@ -15,4 +15,5 @@
     <string name="tv_lbl_bar_and_restaurant">Bar And\nRestaurant</string>
     <string name="tv_lbl_first_ncoastline">First\nCoastline</string>
     <string name="title_activity_detail">DetailActivity</string>
+    <string name="em_no_data">No Data Available</string>
 </resources>
