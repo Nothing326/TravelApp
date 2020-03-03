@@ -61,6 +61,7 @@ class HomeFragment : Fragment(),TourItemDelegate {
     }
 
     private fun setUpRecyclerViewForCountry(){
+
         mCountryListAdapter = CountryListAdapter(this)
 
         val linearLayoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
